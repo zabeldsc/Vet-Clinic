@@ -1,7 +1,7 @@
 public class Funcionario extends Pessoa{
     private String turnoTrab;
 
-    public Funcionario(String nome, String cpf, String email, long int telefone, String turnoTrab){
+    public Funcionario(String nome, String cpf, String email, String telefone, String turnoTrab){
         super(nome, cpf, email, telefone);
         this.turnoTrab = turnoTrab;
     }

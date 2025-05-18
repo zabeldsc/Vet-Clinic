@@ -1,9 +1,9 @@
 public class Veterinario extends Funcionario{
     private String especialidade;
-    private long int numCFMV;
+    private String numCFMV;
 
-    public Veterinario(String nome, String cpf, String email, long int telefone, String especialidade, long int numCFMV) {
-        super(nome, cpf, email, telefone);
+    public Veterinario(String nome, String cpf, String email, String telefone, String especialidade, String numCFMV, String turnoTrab) {
+        super(nome, cpf, email, telefone, turnoTrab);
         this.especialidade = especialidade;
         this.numCFMV = numCFMV;
     }
@@ -16,11 +16,11 @@ public class Veterinario extends Funcionario{
         this.especialidade = especialidade;
     }
 
-    public int getNumCFMV() {
+    public String getNumCFMV() {
         return numCFMV;
     }
 
-    public void setNumCFMV(int numCFMV) {
+    public void setNumCFMV(String numCFMV) {
         this.numCFMV = numCFMV;
     }
 

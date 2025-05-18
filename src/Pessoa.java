@@ -1,8 +1,7 @@
 class Pessoa{
-    private String nome, cpf, email;
-    private long int telefone;
+    private String nome, cpf, email, telefone;
 
-    public Pessoa(String nome, String cpf, String email, int telefone) {
+    public Pessoa(String nome, String cpf, String email, String telefone) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
@@ -33,11 +32,11 @@ class Pessoa{
         this.email = email;
     }
 
-    public int getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
 }
