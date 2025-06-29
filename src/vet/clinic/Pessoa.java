@@ -1,3 +1,5 @@
+package vet.clinic;
+
 class Pessoa{
     private String nome, cpf, email, telefone;
 

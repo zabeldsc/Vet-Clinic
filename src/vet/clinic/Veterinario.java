@@ -1,3 +1,5 @@
+package vet.clinic;
+
 public class Veterinario extends Funcionario{
     private String especialidade;
     private String numCFMV;

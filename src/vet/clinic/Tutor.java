@@ -1,3 +1,5 @@
+package vet.clinic;
+
 import java.util.ArrayList;
 
 public class Tutor extends Pessoa{

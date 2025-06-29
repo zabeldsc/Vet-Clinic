@@ -1,3 +1,5 @@
+package vet.clinic;
+
 public class Funcionario extends Pessoa{
     private String turnoTrab;
 
