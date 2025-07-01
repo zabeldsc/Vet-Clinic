@@ -110,7 +110,7 @@ public class TelaLogin extends javax.swing.JPanel {
         String senha = new String(senhaDigitada);
 
         // Verifica se a senha está correta
-        if (senha.equals("testetesteteste")) {
+        if (senha.equals("teste")) {
             telaPrincipal.mostrarTela("telaMenu");
         } else {
             JOptionPane.showMessageDialog(this, "Senha incorreta!", "Erro", JOptionPane.ERROR_MESSAGE);
