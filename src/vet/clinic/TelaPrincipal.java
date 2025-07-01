@@ -15,46 +15,87 @@ public class TelaPrincipal extends javax.swing.JFrame {
     JPanel container;
 
     public TelaPrincipal() {
-        setTitle("Sistema Exemplo");
-        setSize(500, 400);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        initComponents();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        // Define o layout principal como CardLayout
+        getContentPane().setLayout(new CardLayout());
 
-        cardLayout = new CardLayout();
-        container = new JPanel(cardLayout);
+        // Adiciona as telas ao CardLayout
+        getContentPane().add(new TelaLogin(this), "telaLogin");
+        getContentPane().add(new TelaMenu(this), "telaMenu");
 
-        // Adiciona as telas no container
-        container.add(new TelaLogin(this), "login");
-        container.add(new TelaMenu(this), "menu");
-//        container.add(new TelaCadastro(this), "cadastro");
-//        container.add(new TelaConfiguracoes(this), "config");
-
-        add(container);
-        cardLayout.show(container, "login");
+        // Exibe a primeira tela
+        mostrarTela("telaLogin");
+        setVisible(true);
     }
 
-    public void mostrarTela(String nome) {
-        cardLayout.show(container, nome);
+    public void mostrarTela(String nomeTela) {
+        CardLayout cl = (CardLayout)(getContentPane().getLayout());
+        cl.show(getContentPane(), nomeTela);
+        
+        if (nomeTela.equals("telaLogin")) {
+             setJMenuBar(null);
+        } else {
+            setJMenuBar(jMenuBar1);
+        }
+        
+        revalidate();
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        jMenu5 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jMenu1.setText("Cadastros");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Agendamento");
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Consultas");
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("Vacinas");
+        jMenuBar1.add(jMenu4);
+
+        jMenu5.setText("Cobrança");
+        jMenuBar1.add(jMenu5);
+
+        jMenu6.setText("Relatórios");
+        jMenuBar1.add(jMenu6);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 502, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 275, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
+    private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }
