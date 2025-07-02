@@ -10,11 +10,12 @@ import java.awt.*;
  * @author zzsjzz
  */
 public class TelaPrincipal extends javax.swing.JFrame {
-    
     CardLayout cardLayout;
     JPanel container;
+    private Sistema sistema = new Sistema();
 
     public TelaPrincipal() {
+        super("Clínica Veterinária");
         initComponents();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
@@ -24,11 +25,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // Adiciona as telas ao CardLayout
         getContentPane().add(new TelaLogin(this), "telaLogin");
         getContentPane().add(new TelaMenu(this), "telaMenu");
-        getContentPane().add(new TelaCadastro(this), "telaCadastro");
+        getContentPane().add(new TelaCadTutor(this), "telaCadTutor");
 
         // Exibe a primeira tela
         mostrarTela("telaLogin");
-        setVisible(true);
+        setLocationRelativeTo(null); // centraliza na tela
     }
 
     public void mostrarTela(String nomeTela) {
@@ -43,6 +44,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         
         revalidate();
     }
+    
+    public Sistema getSistema(){
+        return sistema;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -115,7 +121,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        
+        this.mostrarTela("telaCadTutor");
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

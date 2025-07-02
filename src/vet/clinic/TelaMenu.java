@@ -11,20 +11,6 @@ import javax.swing.*;
  */
 public class TelaMenu extends javax.swing.JPanel {
     public TelaMenu(TelaPrincipal telaPrincipal) {
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        add(new JLabel("Menu Principal"));
-
-        JButton btnCadastro = new JButton("Ir para Cadastro");
-        JButton btnConfig = new JButton("Ir para Configurações");
-        JButton btnSair = new JButton("Sair");
-
-        add(btnCadastro);
-        add(btnConfig);
-        add(btnSair);
-
-//        btnCadastro.addActionListener(e -> telaPrincipal.mostrarTela("cadastro"));
-//        btnConfig.addActionListener(e -> telaPrincipal.mostrarTela("config"));
-//        btnSair.addActionListener(e -> telaPrincipal.mostrarTela("login"));
         initComponents();
     }
 

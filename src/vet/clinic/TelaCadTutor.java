@@ -4,16 +4,22 @@
  */
 package vet.clinic;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author isabel
  */
-public class TelaCadastro extends javax.swing.JPanel {
+public class TelaCadTutor extends javax.swing.JPanel {
+    
+    private TelaPrincipal telaPrincipal;
+    private String nome, cpf, email, telefone;
 
     /**
      * Creates new form TelaCadastro
      */
-    public TelaCadastro(TelaPrincipal telaPrincipal) {
+    public TelaCadTutor(TelaPrincipal telaPrincipal) {
+        this.telaPrincipal = telaPrincipal;
         initComponents();
     }
 
@@ -26,19 +32,174 @@ public class TelaCadastro extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        cxNome = new javax.swing.JTextField();
+        cxCpf = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        cxEmail = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        cxTelefone = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        cxEndereco = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+
+        jLabel1.setText("Nome:");
+
+        cxNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cxNomeActionPerformed(evt);
+            }
+        });
+
+        cxCpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cxCpfActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Cpf:");
+
+        cxEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cxEmailActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Email:");
+
+        cxTelefone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cxTelefoneActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Telefone:");
+
+        cxEndereco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cxEnderecoActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Endereço:");
+
+        jButton1.setText("Cadastrar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cxEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(cxTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(cxNome, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)
+                                .addComponent(cxCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5)
+                                .addComponent(cxEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cxNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cxCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cxEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addGap(10, 10, 10)
+                .addComponent(cxEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cxTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cxNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxNomeActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_cxNomeActionPerformed
+
+    private void cxCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxCpfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cxCpfActionPerformed
+
+    private void cxEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cxEmailActionPerformed
+
+    private void cxTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxTelefoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cxTelefoneActionPerformed
+
+    private void cxEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxEnderecoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cxEnderecoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if(cxNome.getText().trim().isEmpty() ||
+            cxCpf.getText().trim().isEmpty() ||
+            cxEmail.getText().trim().isEmpty() ||
+            cxTelefone.getText().trim().isEmpty() ||
+            cxEndereco.getText().trim().isEmpty()){
+            
+            JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos!", "Campos obrigatórios", JOptionPane.WARNING_MESSAGE);
+
+        }else{
+            JOptionPane.showMessageDialog(this, "Tutor cadastrado com sucesso!");
+            telaPrincipal.mostrarTela("telaMenu");
+        
+            Tutor tutor = new Tutor(cxNome.getText(), cxCpf.getText(), cxEmail.getText(), cxTelefone.getText(), cxEndereco.getText());
+            telaPrincipal.getSistema().getTutores().add(tutor);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField cxCpf;
+    private javax.swing.JTextField cxEmail;
+    private javax.swing.JTextField cxEndereco;
+    private javax.swing.JTextField cxNome;
+    private javax.swing.JTextField cxTelefone;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }
