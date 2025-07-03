@@ -26,6 +26,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().add(new TelaLogin(this), "telaLogin");
         getContentPane().add(new TelaMenu(this), "telaMenu");
         getContentPane().add(new TelaCadTutor(this), "telaCadTutor");
+        getContentPane().add(new TelaCadAnimal(this), "telaCadAnimal");
 
         // Exibe a primeira tela
         mostrarTela("telaLogin");
@@ -78,6 +79,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Animal");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setText("Funcionário");
@@ -123,6 +129,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.mostrarTela("telaCadTutor");
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        this.mostrarTela("telaCadAnimal");
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;

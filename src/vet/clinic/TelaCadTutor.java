@@ -176,7 +176,7 @@ public class TelaCadTutor extends javax.swing.JPanel {
             cxEmail.getText().trim().isEmpty() ||
             cxTelefone.getText().trim().isEmpty() ||
             cxEndereco.getText().trim().isEmpty()){
-            
+          
             JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos!", "Campos obrigatórios", JOptionPane.WARNING_MESSAGE);
 
         }else{
