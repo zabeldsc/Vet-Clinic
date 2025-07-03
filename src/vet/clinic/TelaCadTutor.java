@@ -180,11 +180,17 @@ public class TelaCadTutor extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos!", "Campos obrigatórios", JOptionPane.WARNING_MESSAGE);
 
         }else{
-            JOptionPane.showMessageDialog(this, "Tutor cadastrado com sucesso!");
-            telaPrincipal.mostrarTela("telaMenu");
-        
             Tutor tutor = new Tutor(cxNome.getText(), cxCpf.getText(), cxEmail.getText(), cxTelefone.getText(), cxEndereco.getText());
             telaPrincipal.getSistema().getTutores().add(tutor);
+            
+            cxNome.setText("");
+            cxCpf.setText("");
+            cxEmail.setText("");
+            cxTelefone.setText("");
+            cxEndereco.setText("");
+            
+            JOptionPane.showMessageDialog(this, "Tutor cadastrado com sucesso!");
+            telaPrincipal.mostrarTela("telaMenu");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

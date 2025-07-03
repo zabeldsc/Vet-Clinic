@@ -40,5 +40,10 @@ public class Tutor extends Pessoa{
     {
         animal = null;
     }
+    
+    @Override
+    public String toString() {
+        return getNome();
+    }
 
 }

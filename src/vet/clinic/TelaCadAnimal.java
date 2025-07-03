@@ -24,19 +24,27 @@ public class TelaCadAnimal extends javax.swing.JPanel {
     public TelaCadAnimal(TelaPrincipal telaPrincipal) {
         this.telaPrincipal = telaPrincipal;
         initComponents();
-        preencherComboTutores();
+        
+        // Quando o painel for exibido, recarrega os tutores
+        this.addComponentListener(new java.awt.event.ComponentAdapter() {
+            @Override
+            public void componentShown(java.awt.event.ComponentEvent e) {
+                preencherComboTutores();
+            }
+        });
     }
     
     private void preencherComboTutores() {
-        ArrayList<Tutor> tutores = telaPrincipal.getSistema().getTutores();
+        ArrayList<Tutor> lista = telaPrincipal.getSistema().getTutores();
 
-        DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<>();
-        for (Tutor t : tutores) {
-            System.out.println("Nome: " + t.getNome());
-            modelo.addElement(t.getNome());   // guarda o objeto Tutor
+        // Cria um modelo de String e popula com os nomes
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        for (Tutor t : lista) {
+            model.addElement(t.getNome());
         }
-        System.out.println("NPreencheu combo");
-        cxTutor.setModel(modelo);
+
+        // Atualiza o combo
+        cxTutor.setModel(model);
     }
 
 
@@ -160,11 +168,34 @@ public class TelaCadAnimal extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos!", "Campos obrigatórios", JOptionPane.WARNING_MESSAGE);
 
         }else{
-            JOptionPane.showMessageDialog(this, "Tutor cadastrado com sucesso!");
-            telaPrincipal.mostrarTela("telaMenu");
+            String nomeSelecionado = (String) cxTutor.getSelectedItem();
 
-            Animal animal = new Animal(cxNome.getText(), cxRaca.getText(), dataNasc, tutor);
-            telaPrincipal.getSistema().getTutores().add(tutor);
+            Tutor tutorSelecionado = null;
+            for (Tutor t : telaPrincipal.getSistema().getTutores()) {
+                if (t.getNome().equals(nomeSelecionado)) {
+                    tutorSelecionado = t;
+                    break;
+                }
+            }
+
+            if (tutorSelecionado == null) {
+                JOptionPane.showMessageDialog(this,
+                    "Erro: tutor não encontrado!",
+                    "Seleção inválida",
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+                    
+            Animal animal = new Animal(cxNome.getText(), cxRaca.getText(), dataNasc, tutorSelecionado);
+            telaPrincipal.getSistema().getAnimais().add(animal);
+            
+            cxNome.setText("");
+            cxRaca.setText("");
+            cxDataNasc.setText("");
+            cxTutor.setSelectedIndex(-1);  // sem seleção
+            
+            JOptionPane.showMessageDialog(this, "Animal cadastrado com sucesso!");
+            telaPrincipal.mostrarTela("telaMenu");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -174,7 +205,7 @@ public class TelaCadAnimal extends javax.swing.JPanel {
     }//GEN-LAST:event_cxNomeActionPerformed
 
     private void cxTutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxTutorActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_cxTutorActionPerformed
 
 

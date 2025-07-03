@@ -13,13 +13,19 @@ import java.util.ArrayList;
 public class Sistema {
     
     private ArrayList<Tutor> tutores;
+    private ArrayList<Animal> animais;
     
     public Sistema(){
         this.tutores = new ArrayList<>();
+        this.animais = new ArrayList<>();
     }
     
     public ArrayList<Tutor> getTutores(){
         return tutores;
+    }
+    
+    public ArrayList<Animal> getAnimais(){
+        return animais;
     }
     
 }
