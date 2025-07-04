@@ -4,6 +4,8 @@
  */
 package vet.clinic;
 
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,12 +15,37 @@ import javax.swing.JOptionPane;
 public class TelaCadFuncionario extends javax.swing.JPanel {
     
     private TelaPrincipal telaPrincipal;
-    private String nome, cpf, email, telefone;
+    private String nome, cpf, email, telefone, turnoTrab;
     /**
      * Creates new form TelaCadFuncionario
      */
     public TelaCadFuncionario(TelaPrincipal telaPrincipal) {
+        this.telaPrincipal = telaPrincipal;
         initComponents();
+        
+        cbTipoFuncionario.setSelectedIndex(0);
+        cbTipoFuncionarioActionPerformed(null);
+        
+        // Quando o painel for exibido, recarrega as especialidades
+        this.addComponentListener(new java.awt.event.ComponentAdapter() {
+            @Override
+            public void componentShown(java.awt.event.ComponentEvent e) {
+                preencherComboEspecialidades();
+            }
+        });
+    }
+    
+    private void preencherComboEspecialidades() {
+        ArrayList<Especialidade> lista = telaPrincipal.getSistema().getEspecialidades();
+
+        // Cria um modelo de String e popula com os nomes
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        for (Especialidade t : lista) {
+            model.addElement(t.getTipo());
+        }
+
+        // Atualiza o combo
+        cxEspecialidade.setModel(model);
     }
 
     /**
@@ -39,8 +66,14 @@ public class TelaCadFuncionario extends javax.swing.JPanel {
         cxNome = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
+        cxTurnoTrab = new javax.swing.JTextField();
+        cbTipoFuncionario = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        cxCrmv = new javax.swing.JTextField();
+        lblCrmv = new javax.swing.JLabel();
+        cxEspecialidade = new javax.swing.JComboBox<>();
+        lblEspecialidade = new javax.swing.JLabel();
 
         cxTelefone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,63 +114,112 @@ public class TelaCadFuncionario extends javax.swing.JPanel {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jLabel5.setText("Tipo");
+
+        cxTurnoTrab.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                cxTurnoTrabActionPerformed(evt);
             }
         });
 
-        jLabel5.setText("Turno de Trabalho:");
+        cbTipoFuncionario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Funcionário Padrão", "Veterinário" }));
+        cbTipoFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoFuncionarioActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Turno de Trabalho:");
+
+        cxCrmv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cxCrmvActionPerformed(evt);
+            }
+        });
+
+        lblCrmv.setText("Número CFMV");
+
+        cxEspecialidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cxEspecialidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cxEspecialidadeActionPerformed(evt);
+            }
+        });
+
+        lblEspecialidade.setText("Especialidade");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cxTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cxEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4)
-                    .addComponent(cxNome, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(cxCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                    .addComponent(jLabel3)
+                    .addComponent(cxEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                    .addComponent(cxCpf)
+                    .addComponent(cxNome)
+                    .addComponent(cxTelefone))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(35, 35, 35))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel5)
+                        .addComponent(cbTipoFuncionario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6)
+                        .addComponent(lblCrmv)
+                        .addComponent(cxCrmv)
+                        .addComponent(cxTurnoTrab)
+                        .addComponent(cxEspecialidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblEspecialidade))
+                .addGap(31, 31, 31))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cxNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cxCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cxNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cxTurnoTrab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cxCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbTipoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cxEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblCrmv)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cxCrmv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel5))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cxEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
+                    .addComponent(jLabel4)
+                    .addComponent(lblEspecialidade))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cxTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(53, Short.MAX_VALUE))
+                    .addComponent(cxEspecialidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -159,25 +241,129 @@ public class TelaCadFuncionario extends javax.swing.JPanel {
     }//GEN-LAST:event_cxNomeActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        boolean isVeterinario = cbTipoFuncionario.getSelectedItem().equals("Veterinário");
         
+        if (cxTurnoTrab.getText().trim().isEmpty() ||
+            cxTelefone.getText().trim().isEmpty() ||
+            cxNome.getText().trim().isEmpty() ||
+            cxCpf.getText().trim().isEmpty() ||
+            cxEmail.getText().trim().isEmpty()
+         ) {
+            JOptionPane.showMessageDialog(this,
+                "Por favor, preencha todos os campos obrigatórios!",
+                "Campos obrigatórios",
+                JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        if (!isVeterinario) {
+            Funcionario f = new Funcionario(
+                cxNome.getText().trim(),
+                cxCpf.getText().trim(),
+                cxEmail.getText().trim(),
+                cxTelefone.getText().trim(),
+                cxTurnoTrab.getText().trim()
+            );
+            telaPrincipal.getSistema().getFuncionarios().add(f); 
+            
+            JOptionPane.showMessageDialog(this,
+                "Cadastro realizado com sucesso!",
+                "Concluído",
+                JOptionPane.INFORMATION_MESSAGE);
+            telaPrincipal.mostrarTela("telaMenu");
+        } else {
+            if (cxCrmv.getText().trim().isEmpty()){
+                JOptionPane.showMessageDialog(this,
+                    "Por favor, preencha CRMV",
+                    "Campo obrigatório",
+                    JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            
+            String nomeSelecionado = (String) cxEspecialidade.getSelectedItem();
+
+            Especialidade especialidadeSelecionada = null;
+            for (Especialidade e : telaPrincipal.getSistema().getEspecialidades()) {
+                if (e.getTipo().equals(nomeSelecionado)) {
+                    especialidadeSelecionada = e;
+                    break;
+                }
+            }
+            
+            if (especialidadeSelecionada == null) {
+                JOptionPane.showMessageDialog(this,
+                    "Erro: especialidade não encontrada!",
+                    "Seleção inválida",
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }      
+
+            Veterinario veterinario = new Veterinario(cxNome.getText().trim(), cxCpf.getText().trim(), cxEmail.getText().trim(), cxTelefone.getText().trim(), especialidadeSelecionada, cxCrmv.getText().trim(), cxTurnoTrab.getText().trim());
+            telaPrincipal.getSistema().getVeterinarios().add(veterinario);
+            
+            cxNome.setText("");
+            cxCpf.setText("");
+            cxEmail.setText("");
+            cxTelefone.setText("");
+            cxTurnoTrab.setText("");
+            cbTipoFuncionario.setSelectedIndex(0);
+            cxEspecialidade.setSelectedIndex(-1);  // sem seleção
+            
+            // garante que os extras fiquem invisíveis
+            cbTipoFuncionarioActionPerformed(null);
+
+            JOptionPane.showMessageDialog(this,
+                "Cadastro realizado com sucesso!",
+                "Concluído",
+                JOptionPane.INFORMATION_MESSAGE);
+            telaPrincipal.mostrarTela("telaMenu");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void cxTurnoTrabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxTurnoTrabActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_cxTurnoTrabActionPerformed
+
+    private void cbTipoFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoFuncionarioActionPerformed
+        boolean isVeterinario = cbTipoFuncionario.getSelectedItem().equals("Veterinário");
+
+        // Mostra ou esconde os campos extras
+        lblCrmv.setVisible(isVeterinario);
+        cxCrmv.setVisible(isVeterinario);
+        lblEspecialidade.setVisible(isVeterinario);
+        cxEspecialidade.setVisible(isVeterinario);
+
+        // (opcional) Redimensiona o painel
+        this.revalidate();
+        this.repaint();
+    }//GEN-LAST:event_cbTipoFuncionarioActionPerformed
+
+    private void cxCrmvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxCrmvActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cxCrmvActionPerformed
+
+    private void cxEspecialidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxEspecialidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cxEspecialidadeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbTipoFuncionario;
     private javax.swing.JTextField cxCpf;
+    private javax.swing.JTextField cxCrmv;
     private javax.swing.JTextField cxEmail;
+    private javax.swing.JComboBox<String> cxEspecialidade;
     private javax.swing.JTextField cxNome;
     private javax.swing.JTextField cxTelefone;
+    private javax.swing.JTextField cxTurnoTrab;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel lblCrmv;
+    private javax.swing.JLabel lblEspecialidade;
     // End of variables declaration//GEN-END:variables
 }

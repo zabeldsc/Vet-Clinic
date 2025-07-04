@@ -1,20 +1,20 @@
 package vet.clinic;
 
 public class Veterinario extends Funcionario{
-    private String especialidade;
+    private Especialidade especialidade;
     private String numCFMV;
 
-    public Veterinario(String nome, String cpf, String email, String telefone, String especialidade, String numCFMV, String turnoTrab) {
+    public Veterinario(String nome, String cpf, String email, String telefone, Especialidade especialidade, String numCFMV, String turnoTrab) {
         super(nome, cpf, email, telefone, turnoTrab);
         this.especialidade = especialidade;
         this.numCFMV = numCFMV;
     }
 
-    public String getEspecialidade() {
+    public Especialidade getEspecialidade() {
         return especialidade;
     }
 
-    public void setEspecialidade(String especialidade) {
+    public void setEspecialidade(Especialidade especialidade) {
         this.especialidade = especialidade;
     }
 

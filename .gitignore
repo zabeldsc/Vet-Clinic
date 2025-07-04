@@ -1,0 +1,35 @@
+# Arquivos de compilação Java
+*.class
+
+# Diretório de build (no seu caso, dsgc/)
+dsgc/
+
+# Arquivos de log e temporários
+*.log
+*.tmp
+*.swp
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos gerados por IDEs
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# Outros editores (caso alguém use)
+.vscode/
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Arquivos JAR/WAR/EAR gerados
+*.jar
+*.war
+*.ear
