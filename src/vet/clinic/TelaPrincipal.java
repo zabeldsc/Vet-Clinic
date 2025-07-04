@@ -35,6 +35,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().add(new TelaListaAnimal(this), "telaListaAnimal");
         getContentPane().add(new TelaCadFuncionario(this), "telaCadFuncionario");
         getContentPane().add(new TelaCadEspecialidade(this), "telaCadEspecialidade");
+        getContentPane().add(new TelaCadVacina(this), "telaCadVacina");
 
         // Exibe a primeira tela
         mostrarTela("telaLogin");
@@ -85,6 +86,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem12 = new javax.swing.JMenuItem();
+        jMenu11 = new javax.swing.JMenu();
+        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -222,6 +227,34 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu10.add(jMenuItem12);
 
         jMenu1.add(jMenu10);
+
+        jMenu11.setText("Vacina");
+
+        jMenuItem11.setText("Nova");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu11.add(jMenuItem11);
+
+        jMenuItem13.setText("Editar");
+        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem13ActionPerformed(evt);
+            }
+        });
+        jMenu11.add(jMenuItem13);
+
+        jMenuItem14.setText("Excluir");
+        jMenuItem14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem14ActionPerformed(evt);
+            }
+        });
+        jMenu11.add(jMenuItem14);
+
+        jMenu1.add(jMenu11);
 
         jMenuBar1.add(jMenu1);
 
@@ -734,9 +767,128 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
     }//GEN-LAST:event_jMenuItem12ActionPerformed
 
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        this.mostrarTela("telaCadVacina");
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
+
+    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
+        // obtém a lista de vacinas
+        ArrayList<Vacina> lista = sistema.getVacinas();
+        if (lista.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Não há vacinas cadastradas.",
+                "Editar Vacina",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            return;
+        }
+
+        // converte em array para o combo
+        Vacina[] options = lista.toArray(new Vacina[0]);
+        Vacina sel = (Vacina) JOptionPane.showInputDialog(
+            this,
+            "Escolha a vacina a editar:",
+            "Editar Vacina",
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            options,
+            options[0]
+        );
+        if (sel == null) {
+            // usuário cancelou
+            return;
+        }
+
+        // cria campos pré-preenchidos
+        JTextField cxNome = new JTextField(sel.getNome(), 20);
+
+        JFormattedTextField cxValor = new JFormattedTextField(
+            new javax.swing.text.DefaultFormatterFactory(
+                new javax.swing.text.NumberFormatter()
+            )
+        );
+        cxValor.setColumns(10);
+        cxValor.setValue(sel.getValor());
+
+        // monta o painel de edição
+        JPanel panel = new JPanel(new GridLayout(0, 1));
+        panel.add(new JLabel("Nome:"));  
+        panel.add(cxNome);
+        panel.add(new JLabel("Valor:")); 
+        panel.add(cxValor);
+
+        // exibe diálogo de confirmação
+        int resp = JOptionPane.showConfirmDialog(
+            this,
+            panel,
+            "Editar Vacina",
+            JOptionPane.OK_CANCEL_OPTION,
+            JOptionPane.PLAIN_MESSAGE
+        );
+        if (resp != JOptionPane.OK_OPTION) {
+            return;
+        }
+
+        // aplica as alterações no objeto
+        sel.setNome(cxNome.getText().trim());
+        Object val = cxValor.getValue();
+        if (val instanceof Number) {
+            sel.setValor(((Number) val).doubleValue());
+        }
+
+        // feedback
+        JOptionPane.showMessageDialog(
+            this,
+            "Vacina atualizada com sucesso!",
+            "Concluído",
+            JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jMenuItem13ActionPerformed
+
+    private void jMenuItem14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem14ActionPerformed
+        ArrayList<Vacina> lista = sistema.getVacinas();
+        if (lista.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Não há vacinas cadastradas.",
+                "Excluir Vacina",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            return;
+        }
+
+        // converte em array para o combo
+        Vacina[] opcoes = lista.toArray(new Vacina[0]);
+
+        // exibe diálogo de seleção
+        Vacina sel = (Vacina) JOptionPane.showInputDialog(
+            this,
+            "Selecione a vacina para excluir:",
+            "Excluir Vacina",
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            opcoes,
+            opcoes[0]
+        );
+        if (sel == null) {
+            // cancelou
+            return;
+        }
+
+        // remove e notifica
+        lista.remove(sel);
+        JOptionPane.showMessageDialog(
+            this,
+            "Vacina \"" + sel.getNome() + "\" excluída com sucesso!",
+            "Concluído",
+            JOptionPane.INFORMATION_MESSAGE
+        );
+    }//GEN-LAST:event_jMenuItem14ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
+    private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -748,7 +900,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
