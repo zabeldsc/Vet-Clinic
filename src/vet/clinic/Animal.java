@@ -1,17 +1,16 @@
 package vet.clinic;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 class Animal {
     private String nome, raca;
-    private LocalDate dataNasc;
+    private String dataNasc;
     private Tutor tutor;
     private List<Vacina> cartaoVacina;
     private List<Consulta> consultas;
 
-    public Animal(String nome, String raca, LocalDate dataNasc, Tutor tutor, List<Vacina> cartaoVacina,
+    public Animal(String nome, String raca, String dataNasc, Tutor tutor, List<Vacina> cartaoVacina,
             List<Consulta> consultas) {
         this.nome = nome;
         this.raca = raca;
@@ -21,19 +20,15 @@ class Animal {
         this.consultas = (consultas != null) ? consultas : new ArrayList<>();
     }
 
-    public Animal(String nome, String raca, LocalDate dataNasc, Tutor tutor) {
+    public Animal(String nome, String raca, String dataNasc, Tutor tutor) {
         this(nome, raca, dataNasc, tutor, new ArrayList<>(), new ArrayList<>());
     }
 
     @Override
     public String toString() {
-        return "Animal{" +
-                "nome='" + nome + '\'' +
-                ", raca='" + raca + '\'' +
-                ", dataNasc=" + dataNasc +
-                ", tutor=" + (tutor != null ? tutor.getNome() : "Sem tutor") +
-                '}';
+        return nome;
     }
+
 
     public String getNome() {
         return nome;
@@ -51,11 +46,11 @@ class Animal {
         this.raca = raca;
     }
 
-    public LocalDate getDataNasc() {
+    public String getDataNasc() {
         return dataNasc;
     }
 
-    public void setDataNasc(LocalDate dataNasc) {
+    public void setDataNasc(String dataNasc) {
         this.dataNasc = dataNasc;
     }
 
@@ -75,7 +70,7 @@ class Animal {
         this.cartaoVacina = cartaoVacina;
     }
 
-    public void marcarConsulta(LocalDate data, String descricao) {
+    public void marcarConsulta(String data, String descricao) {
         consultas.add(new Consulta(data, descricao));
     }
 

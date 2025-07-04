@@ -4,7 +4,6 @@
  */
 package vet.clinic;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -17,7 +16,7 @@ public class TelaCadAnimal extends javax.swing.JPanel {
     
     private TelaPrincipal telaPrincipal;
     private Tutor tutor; 
-    private LocalDate dataNasc;
+    private String dataNasc;
    /**
      * Creates new form TelaCadAnimal
      */
@@ -184,9 +183,9 @@ public class TelaCadAnimal extends javax.swing.JPanel {
                     "Seleção inválida",
                     JOptionPane.ERROR_MESSAGE);
                 return;
-            }
+            }                      
                     
-            Animal animal = new Animal(cxNome.getText(), cxRaca.getText(), dataNasc, tutorSelecionado);
+            Animal animal = new Animal(cxNome.getText(), cxRaca.getText(), cxDataNasc.getText(), tutorSelecionado);
             telaPrincipal.getSistema().getAnimais().add(animal);
             
             cxNome.setText("");
@@ -201,7 +200,6 @@ public class TelaCadAnimal extends javax.swing.JPanel {
 
     private void cxNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxNomeActionPerformed
         // TODO add your handling code here:
-
     }//GEN-LAST:event_cxNomeActionPerformed
 
     private void cxTutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxTutorActionPerformed
