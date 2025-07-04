@@ -17,7 +17,7 @@ public class TelaCadFuncionario extends javax.swing.JPanel {
     /**
      * Creates new form TelaCadFuncionario
      */
-    public TelaCadFuncionario() {
+    public TelaCadFuncionario(TelaPrincipal telaPrincipal) {
         initComponents();
     }
 
