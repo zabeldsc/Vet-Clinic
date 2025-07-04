@@ -19,4 +19,9 @@ public class Funcionario extends Pessoa{
     public void excluirFunc(Funcionario funcionario) {
         funcionario = null;
     }
+    
+    @Override
+    public String toString() {
+        return getNome();
+    }
 }

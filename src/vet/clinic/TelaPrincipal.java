@@ -34,6 +34,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().add(new TelaListaTutor(this), "telaListaTutor");
         getContentPane().add(new TelaListaAnimal(this), "telaListaAnimal");
         getContentPane().add(new TelaCadFuncionario(this), "telaCadFuncionario");
+        getContentPane().add(new TelaCadEspecialidade(this), "telaCadEspecialidade");
 
         // Exibe a primeira tela
         mostrarTela("telaLogin");
@@ -80,7 +81,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
-        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenu10 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -173,16 +177,51 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         jMenu9.add(jMenuItem1);
 
-        jMenuItem2.setText("jMenuItem2");
+        jMenuItem2.setText("Editar");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu9.add(jMenuItem2);
 
-        jMenuItem10.setText("jMenuItem10");
+        jMenuItem10.setText("Excluir");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
         jMenu9.add(jMenuItem10);
 
-        jMenuItem11.setText("jMenuItem11");
-        jMenu9.add(jMenuItem11);
-
         jMenu1.add(jMenu9);
+
+        jMenu10.setText("Especialidade");
+
+        jMenuItem3.setText("Nova");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu10.add(jMenuItem3);
+
+        jMenuItem4.setText("Editar");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu10.add(jMenuItem4);
+
+        jMenuItem12.setText("Excluir");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
+        jMenu10.add(jMenuItem12);
+
+        jMenu1.add(jMenu10);
 
         jMenuBar1.add(jMenu1);
 
@@ -445,8 +484,259 @@ public class TelaPrincipal extends javax.swing.JFrame {
         this.mostrarTela("telaCadFuncionario");
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // obtém a lista de funcionários (inclui veterinários)
+        ArrayList<Funcionario> lista = sistema.getFuncionarios();
+        if (lista.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Não há funcionários cadastrados.",
+                "Editar Funcionário",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            return;
+        }
+
+        // transforma em array e exibe combo para escolher
+        Funcionario[] options = lista.toArray(new Funcionario[0]);
+        Funcionario sel = (Funcionario) JOptionPane.showInputDialog(
+            this,
+            "Escolha o funcionário a editar:",
+            "Editar Funcionário",
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            options,
+            options[0]
+        );
+        if (sel == null) return;  // cancelou
+
+        // monta campos com os valores atuais
+        JTextField cxNome   = new JTextField(sel.getNome(), 20);
+        JTextField cxCpf    = new JTextField(sel.getCpf(), 20);
+        JTextField cxEmail  = new JTextField(sel.getEmail(), 20);
+        JTextField cxTel    = new JTextField(sel.getTelefone(), 20);
+        JTextField cxTurno  = new JTextField(sel.getTurnoTrab(), 20);
+
+        // componentes extras para Veterinário
+        JTextField cxCrmv = new JTextField(20);
+        DefaultComboBoxModel<Especialidade> espModel = new DefaultComboBoxModel<>();
+        for (Especialidade e : sistema.getEspecialidades()) {
+            espModel.addElement(e);
+        }
+        JComboBox<Especialidade> cbEsp = new JComboBox<>(espModel);
+
+        boolean isVet = sel instanceof Veterinario;
+        if (isVet) {
+            Veterinario v = (Veterinario) sel;
+            cxCrmv.setText(v.getNumCFMV());
+            cbEsp.setSelectedItem(v.getEspecialidade());
+        }
+
+        // empacota tudo num painel dinâmico
+        JPanel panel = new JPanel(new GridLayout(0,1));
+        panel.add(new JLabel("Nome:"));      panel.add(cxNome);
+        panel.add(new JLabel("CPF:"));       panel.add(cxCpf);
+        panel.add(new JLabel("Email:"));     panel.add(cxEmail);
+        panel.add(new JLabel("Telefone:"));  panel.add(cxTel);
+        panel.add(new JLabel("Turno:"));     panel.add(cxTurno);
+        panel.add(new JLabel("CRMV:"));      panel.add(cxCrmv);
+        panel.add(new JLabel("Especialidade:")); panel.add(cbEsp);
+
+        // mostra/esconde extras conforme o tipo
+        cxCrmv.setVisible(isVet);
+        cbEsp.setVisible(isVet);
+
+        // exibe diálogo de confirmação
+        int resp = JOptionPane.showConfirmDialog(
+            this,
+            panel,
+            "Editar Funcionário",
+            JOptionPane.OK_CANCEL_OPTION,
+            JOptionPane.PLAIN_MESSAGE
+        );
+        if (resp != JOptionPane.OK_OPTION) return;
+
+        // aplica alterações aos campos comuns
+        sel.setNome(cxNome.getText().trim());
+        sel.setCpf(cxCpf.getText().trim());
+        sel.setEmail(cxEmail.getText().trim());
+        sel.setTelefone(cxTel.getText().trim());
+        sel.setTurnoTrab(cxTurno.getText().trim());
+
+        // se for Veterinário, atualiza CRMV e Especialidade
+        if (sel instanceof Veterinario) {
+            Veterinario v = (Veterinario) sel;
+            v.setNumCFMV(cxCrmv.getText().trim());
+            v.setEspecialidade((Especialidade) cbEsp.getSelectedItem());
+        }
+
+        // feedback ao usuário
+        JOptionPane.showMessageDialog(
+            this,
+            "Dados do funcionário atualizados com sucesso!",
+            "Concluído",
+            JOptionPane.INFORMATION_MESSAGE
+        );
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        this.mostrarTela("telaCadEspecialidade");
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        // obtém a lista de funcionários (inclui veterinários)
+        ArrayList<Funcionario> lista = sistema.getFuncionarios();
+        if (lista.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Não há funcionários cadastrados.",
+                "Excluir Funcionário",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            return;
+        }
+
+        // converte em array para usar no combo
+        Funcionario[] opcoes = lista.toArray(new Funcionario[0]);
+
+        // exibe o diálogo com JComboBox interno
+        Funcionario selecionado = (Funcionario) JOptionPane.showInputDialog(
+            this,
+            "Selecione o funcionário para excluir:",
+            "Excluir Funcionário",
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            opcoes,
+            opcoes[0]
+        );
+        if (selecionado == null) {
+            // usuário cancelou
+            return;
+        }
+
+        // remove e notifica
+        lista.remove(selecionado);
+        JOptionPane.showMessageDialog(
+            this,
+            "Funcionário \"" + selecionado.getNome() + "\" excluído com sucesso!",
+            "Concluído",
+            JOptionPane.INFORMATION_MESSAGE
+        );
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // obtém a lista de especialidades
+        ArrayList<Especialidade> lista = sistema.getEspecialidades();
+        if (lista.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Não há especialidades cadastradas.",
+                "Editar Especialidade",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            return;
+        }
+
+        // converte em array para o combo
+        Especialidade[] options = lista.toArray(new Especialidade[0]);
+        Especialidade sel = (Especialidade) JOptionPane.showInputDialog(
+            this,
+            "Escolha a especialidade a editar:",
+            "Editar Especialidade",
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            options,
+            options[0]
+        );
+        if (sel == null) {
+            // cancelou
+            return;
+        }
+
+        // cria campos já preenchidos
+        JTextField cxTipo = new JTextField(sel.getTipo(), 20);
+
+        // Recria o mesmo DefaultFormatterFactory do cadastro
+        JFormattedTextField cxValor = new JFormattedTextField(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        cxValor.setColumns(10);
+        cxValor.setValue(sel.getValorEspec());
+
+        // monta o painel
+        JPanel panel = new JPanel(new GridLayout(0, 1));
+        panel.add(new JLabel("Tipo:"));  panel.add(cxTipo);
+        panel.add(new JLabel("Valor:")); panel.add(cxValor);
+
+        // exibe o diálogo de confirmação
+        int resp = JOptionPane.showConfirmDialog(
+            this,
+            panel,
+            "Editar Especialidade",
+            JOptionPane.OK_CANCEL_OPTION,
+            JOptionPane.PLAIN_MESSAGE
+        );
+        if (resp != JOptionPane.OK_OPTION) {
+            return;
+        }
+
+        // aplica as alterações no objeto
+        sel.setTipo(cxTipo.getText().trim());
+        Object val = cxValor.getValue();
+        if (val instanceof Number) {
+            sel.setValorEspec(((Number) val).doubleValue());
+        }
+
+        JOptionPane.showMessageDialog(
+            this,
+            "Especialidade atualizada com sucesso!",
+            "Concluído",
+            JOptionPane.INFORMATION_MESSAGE
+        );
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        // obtém a lista de especialidades
+        ArrayList<Especialidade> lista = sistema.getEspecialidades();
+        if (lista.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Não há especialidades cadastradas.",
+                "Excluir Especialidade",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            return;
+        }
+
+        // converte em array para o combo
+        Especialidade[] opcoes = lista.toArray(new Especialidade[0]);
+
+        // exibe o diálogo com JComboBox interno
+        Especialidade selecionada = (Especialidade) JOptionPane.showInputDialog(
+            this,
+            "Selecione a especialidade para excluir:",
+            "Excluir Especialidade",
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            opcoes,
+            opcoes[0]
+        );
+        if (selecionada == null) {
+            // usuário cancelou
+            return;
+        }
+
+        // remove e notifica
+        lista.remove(selecionada);
+        JOptionPane.showMessageDialog(
+            this,
+            "Especialidade \"" + selecionada.getTipo() + "\" excluída com sucesso!",
+            "Concluído",
+            JOptionPane.INFORMATION_MESSAGE
+        );
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -458,8 +748,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;

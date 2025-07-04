@@ -17,7 +17,6 @@ public class Sistema {
     private ArrayList<Especialidade> especialidades;
     private ArrayList<Vacina> vacinas;
     private ArrayList<Funcionario> funcionarios;
-    private ArrayList<Veterinario> veterinarios;
     
     public Sistema(){
         this.tutores = new ArrayList<>();
@@ -25,7 +24,6 @@ public class Sistema {
         this.especialidades = new ArrayList<>();
         this.vacinas = new ArrayList<>();
         this.funcionarios = new ArrayList<>();
-        this.veterinarios = new ArrayList<>();
     }
     
     public ArrayList<Tutor> getTutores(){
@@ -46,10 +44,6 @@ public class Sistema {
     
     public ArrayList<Funcionario> getFuncionarios(){
         return funcionarios;
-    }
-    
-    public ArrayList<Veterinario> getVeterinarios(){
-        return veterinarios;
     }
     
 }
