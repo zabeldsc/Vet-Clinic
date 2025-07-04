@@ -33,6 +33,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().add(new TelaCadAnimal(this), "telaCadAnimal");
         getContentPane().add(new TelaListaTutor(this), "telaListaTutor");
         getContentPane().add(new TelaListaAnimal(this), "telaListaAnimal");
+        getContentPane().add(new TelaCadFuncionario(this), "telaCadFuncionario");
 
         // Exibe a primeira tela
         mostrarTela("telaLogin");
@@ -118,6 +119,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu7.add(miExcluirTutor);
+        jMenuItem3.setText("Funcionário");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
 
         jMenuItemListarTutor.setText("Listar");
         jMenuItemListarTutor.addActionListener(new java.awt.event.ActionListener() {
@@ -421,6 +429,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
             JOptionPane.INFORMATION_MESSAGE
         );
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        this.mostrarTela("telaCadFuncionario");
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
