@@ -29,7 +29,7 @@ nbdist/
 *.ipr
 *.iws
 
-# Arquivos JAR/WAR/EAR gerados
+# Arquivos JAR/WAR/EAR gerados.
 *.jar
 *.war
 *.ear
