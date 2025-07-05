@@ -1,5 +1,6 @@
 package vet.clinic;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,10 +8,10 @@ class Animal {
     private String nome, raca;
     private String dataNasc;
     private Tutor tutor;
-    private List<Vacina> cartaoVacina;
+    private List<VacinacaoAnimal> cartaoVacina;
     private List<Consulta> consultas;
 
-    public Animal(String nome, String raca, String dataNasc, Tutor tutor, List<Vacina> cartaoVacina,
+    public Animal(String nome, String raca, String dataNasc, Tutor tutor, List<VacinacaoAnimal> cartaoVacina,
             List<Consulta> consultas) {
         this.nome = nome;
         this.raca = raca;
@@ -62,19 +63,19 @@ class Animal {
         this.tutor = tutor;
     }
 
-    public List<Vacina> getCartaoVacina() {
+    public List<VacinacaoAnimal> getCartaoVacina() {
         return cartaoVacina;
     }
 
-    public void setCartaoVacina(List<Vacina> cartaoVacina) {
+    public void setCartaoVacina(List<VacinacaoAnimal> cartaoVacina) {
         this.cartaoVacina = cartaoVacina;
     }
 
-    public void marcarConsulta(String data, String descricao) {
+    public void marcarConsulta(LocalDate data, String descricao) {
         consultas.add(new Consulta(data, descricao));
     }
 
-    public void incluirVacina(Vacina vacina) {
+    public void incluirVacina(VacinacaoAnimal vacina) {
         this.cartaoVacina.add(vacina);
     }
 
@@ -92,6 +93,29 @@ class Animal {
             }
         }
     }
+    
+    public float emitirCobranca()
+    {
+        float total = 0;
+        LocalDate dataAtual = LocalDate.now();
+        for(Consulta c:consultas)
+        {
+            if(c.getData().isEqual(dataAtual))
+            {
+                total += c.getVet().getEspecialidade().getValorEspec();
+            }
+        }
+        
+        for(VacinacaoAnimal v:cartaoVacina)
+        {
+            if(v.getDataAplicacao().equals(dataAtual))
+            {
+                total += v.getVacina().getValor();
+            }
+        }
+        
+        return total;
+    }
 
     public void emitirProntuario() {
         System.out.println("===== Prontuário =====");
@@ -103,8 +127,8 @@ class Animal {
         if (cartaoVacina.isEmpty()) {
             System.out.println("- Nenhuma vacina registrada.");
         } else {
-            for (Vacina v : cartaoVacina) {
-                System.out.println("- " + v.getNome());
+            for (VacinacaoAnimal v : cartaoVacina) {
+                System.out.println("- " + v.getVacina().getNome());
             }
         }
         System.out.println("======================");

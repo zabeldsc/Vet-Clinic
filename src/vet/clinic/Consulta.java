@@ -1,15 +1,16 @@
 package vet.clinic;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Consulta {
 
     private String problema, diagnostico;
     private ArrayList<String> medicamentos;
-    private String data;
+    private LocalDate data;
     private Veterinario vet;
 
-    public Consulta(String problema, String diagnostico, String data, Veterinario vet) {
+    public Consulta(String problema, String diagnostico, LocalDate data, Veterinario vet) {
         this.problema = problema;
         this.diagnostico = diagnostico;
         this.data = data;
@@ -17,7 +18,7 @@ public class Consulta {
         this.medicamentos = new ArrayList<>();
     }
 
-    public Consulta(String data, String descricao)
+    public Consulta(LocalDate data, String descricao)
     {
         this(descricao, " ", data, null);
     }
@@ -46,11 +47,11 @@ public class Consulta {
         this.medicamentos = medicamentos;
     }
 
-    public String getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 

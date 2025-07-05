@@ -42,6 +42,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         mostrarTela("telaLogin");
         setLocationRelativeTo(null); // centraliza na tela
     }
+    
+    
 
     public void mostrarTela(String nomeTela) {
         CardLayout cl = (CardLayout)(getContentPane().getLayout());
@@ -102,6 +104,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItem20 = new javax.swing.JMenuItem();
         jMenuItem21 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -304,6 +307,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu4);
 
         jMenu5.setText("Cobrança");
+        jMenu5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu5ActionPerformed(evt);
+            }
+        });
+
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("Emitir");
+        jCheckBoxMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jCheckBoxMenuItem1);
+
         jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
@@ -312,7 +330,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 420, Short.MAX_VALUE)
+            .addGap(0, 546, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -923,8 +941,54 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
+    private void jMenu5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu5ActionPerformed
+
+    private void jCheckBoxMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        ArrayList<Animal> lista = sistema.getAnimais();
+        if (lista.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Não há animais cadastrados.",
+                "Emitir Cobrança",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            return;
+        }
+
+        // converte em array para o combo
+        Animal[] opcoes = lista.toArray(new Animal[0]);
+
+        // exibe o dialog com combo
+        Animal selecionado = (Animal) JOptionPane.showInputDialog(
+            this,
+            "Selecione o animal para emitir cobrança:",
+            "Emitir Cobrança",
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            opcoes,
+            opcoes[0]
+        );
+        if (selecionado == null) {
+            // usuário cancelou
+            return;
+        }
+
+        // remove e notifica
+//        lista.remove(selecionado);
+        JOptionPane.showMessageDialog(
+            this,
+            "Valor total: " + selecionado.emitirCobranca(),
+            "Concluído",
+            JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem cxNovo;
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu11;
