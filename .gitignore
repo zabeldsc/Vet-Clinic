@@ -33,3 +33,5 @@ nbdist/
 *.jar
 *.war
 *.ear
+build/
+*.class
