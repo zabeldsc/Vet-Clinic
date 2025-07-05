@@ -5,7 +5,6 @@
 package vet.clinic;
 import javax.swing.*;
 import java.awt.*;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -279,6 +278,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu2.add(jMenuItem15);
 
         jMenuItem16.setText("Excluir");
+        jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem16ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem16);
 
         jMenuBar1.add(jMenu2);
@@ -984,6 +988,52 @@ public class TelaPrincipal extends javax.swing.JFrame {
             "Concluído",
             JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jCheckBoxMenuItem1ActionPerformed
+
+    private void jMenuItem16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem16ActionPerformed
+        // obtém a lista de agendamentos
+        ArrayList<Agendamento> lista = sistema.getAgendamentos();
+        if (lista.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Não há agendamentos cadastrados.",
+                "Excluir Agendamento",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            return;
+        }
+
+        // converte em array para usar no combo
+        Agendamento[] opcoes = lista.toArray(new Agendamento[0]);
+
+        // exibe o diálogo com JComboBox interno
+        Agendamento selecionado = (Agendamento) JOptionPane.showInputDialog(
+            this,
+            "Selecione o agendamento para excluir:",
+            "Excluir Agendamento",
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            opcoes,
+            opcoes[0]
+        );
+        if (selecionado == null) {
+            // usuário cancelou
+            return;
+        }
+
+        // remove e notifica
+        lista.remove(selecionado);
+        String msg = String.format(
+            "Agendamento de %s em %s excluído com sucesso!",
+            selecionado.getAnimal().getNome(),
+            selecionado.getDataHora().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
+        );
+        JOptionPane.showMessageDialog(
+            this,
+            msg,
+            "Concluído",
+            JOptionPane.INFORMATION_MESSAGE
+        );
+    }//GEN-LAST:event_jMenuItem16ActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
