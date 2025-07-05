@@ -80,7 +80,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenu9 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        cxNovo = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenu10 = new javax.swing.JMenu();
@@ -92,15 +92,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem15 = new javax.swing.JMenuItem();
+        jMenuItem16 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem10 = new javax.swing.JMenuItem();
-        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem17 = new javax.swing.JMenuItem();
+        jMenuItem18 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem12 = new javax.swing.JMenuItem();
-        jMenuItem13 = new javax.swing.JMenuItem();
-        jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItem19 = new javax.swing.JMenuItem();
+        jMenuItem20 = new javax.swing.JMenuItem();
+        jMenuItem21 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -181,13 +181,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenu9.setText("Funcionário");
 
-        jMenuItem1.setText("Novo");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        cxNovo.setText("Novo");
+        cxNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                cxNovoActionPerformed(evt);
             }
         });
-        jMenu9.add(jMenuItem1);
+        jMenu9.add(cxNovo);
 
         jMenuItem2.setText("Editar");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -267,39 +267,39 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Agendamento");
 
-        jMenuItem1.setText("Novo");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem15.setText("Novo");
+        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                cxNovoActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        jMenu2.add(jMenuItem15);
 
-        jMenuItem2.setText("Excluir");
-        jMenu2.add(jMenuItem2);
+        jMenuItem16.setText("Excluir");
+        jMenu2.add(jMenuItem16);
 
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Consultas");
 
-        jMenuItem10.setText("Registrar");
-        jMenu3.add(jMenuItem10);
+        jMenuItem17.setText("Registrar");
+        jMenu3.add(jMenuItem17);
 
-        jMenuItem11.setText("Prontuário");
-        jMenu3.add(jMenuItem11);
+        jMenuItem18.setText("Prontuário");
+        jMenu3.add(jMenuItem18);
 
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Vacinas");
 
-        jMenuItem12.setText("Aplicar");
-        jMenu4.add(jMenuItem12);
+        jMenuItem19.setText("Aplicar");
+        jMenu4.add(jMenuItem19);
 
-        jMenuItem13.setText("Histórico");
-        jMenu4.add(jMenuItem13);
+        jMenuItem20.setText("Histórico");
+        jMenu4.add(jMenuItem20);
 
-        jMenuItem14.setText("Vencimento");
-        jMenu4.add(jMenuItem14);
+        jMenuItem21.setText("Vencimento");
+        jMenu4.add(jMenuItem21);
 
         jMenuBar1.add(jMenu4);
 
@@ -546,14 +546,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
         this.mostrarTela("telaCadFuncionario");
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }                                          
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void cxNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxNovoActionPerformed
         // TODO add your handling code here:
         this.mostrarTela("telaAgendamento");
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_cxNovoActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // obtém a lista de funcionários (inclui veterinários)
@@ -924,6 +924,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem14ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem cxNovo;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu11;
@@ -935,13 +936,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem16;
+    private javax.swing.JMenuItem jMenuItem17;
+    private javax.swing.JMenuItem jMenuItem18;
+    private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem20;
+    private javax.swing.JMenuItem jMenuItem21;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
