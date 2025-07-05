@@ -35,3 +35,4 @@ nbdist/
 *.ear
 build/
 *.class
+nbproject/private/
