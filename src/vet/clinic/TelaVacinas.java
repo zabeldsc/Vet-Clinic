@@ -239,6 +239,7 @@ public class TelaVacinas extends javax.swing.JPanel {
             return;
         }
         
+        telaPrincipal.mostrarTela("telaMenu");
     }//GEN-LAST:event_cxAplicarActionPerformed
 
 

@@ -70,6 +70,11 @@ class Animal {
     public void setCartaoVacina(List<VacinacaoAnimal> cartaoVacina) {
         this.cartaoVacina = cartaoVacina;
     }
+    
+    public List<Consulta> getConsultas()
+    {
+        return consultas;
+    }
 
     public void marcarConsulta(LocalDate data, String descricao) {
         consultas.add(new Consulta(data, descricao));

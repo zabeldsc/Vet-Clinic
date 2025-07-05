@@ -274,7 +274,7 @@ public class TelaRegConsulta extends javax.swing.JPanel {
         // Recupera os valores dos campos
         String problema = cxProblema.getText().trim();
         String diagnostico = cxDiagnostico.getText().trim();
-        String medicamentos = ""; // ou use outro campo se houver cxMedicamento
+        String medicamentos = cxMedicamento.getText().trim();
         LocalDate data = LocalDate.of(ano, mes, dia);
         
         String nomeSelecionado = (String) cxVet.getSelectedItem();
@@ -312,6 +312,7 @@ public class TelaRegConsulta extends javax.swing.JPanel {
         }
 
         animal.adicionarConsulta(novaConsulta);
+        telaPrincipal.mostrarTela("telaMenu");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cxMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxMesActionPerformed

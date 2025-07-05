@@ -37,6 +37,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().add(new TelaCadEspecialidade(this), "telaCadEspecialidade");
         getContentPane().add(new TelaCadVacina(this), "telaCadVacina");
         getContentPane().add(new TelaRegConsulta(this), "telaRegConsulta");
+        getContentPane().add(new TelaProntuario(this), "telaProntuario");
+        getContentPane().add(new TelaVacinas(this), "telaVacinas");
         // Exibe a primeira tela
         mostrarTela("telaLogin");
         setLocationRelativeTo(null); // centraliza na tela
@@ -298,6 +300,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu3.add(jMenuItem17);
 
         jMenuItem18.setText("Prontuário");
+        jMenuItem18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem18ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem18);
 
         jMenuBar1.add(jMenu3);
@@ -305,6 +312,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu4.setText("Vacinas");
 
         jMenuItem19.setText("Aplicar");
+        jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem19ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem19);
 
         jMenuItem20.setText("Histórico");
@@ -1049,6 +1061,28 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.mostrarTela("telaAgendamento");
     }//GEN-LAST:event_cxNovoAgActionPerformed
+
+    private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
+        // TODO add your handling code here:
+        
+         ArrayList<Animal> animais = getSistema().getAnimais();
+
+        if (animais == null || animais.isEmpty()) {
+            // Nenhum animal cadastrado - mostrar erro
+            JOptionPane.showMessageDialog(this, 
+                "Nenhum animal cadastrado. Por favor, cadastre um animal primeiro.",
+                "Erro", 
+                JOptionPane.ERROR_MESSAGE);
+            // Você pode fechar essa tela ou desabilitar componentes aqui, se quiser
+        } else {
+            this.mostrarTela("telaProntuario");
+        }
+    }//GEN-LAST:event_jMenuItem18ActionPerformed
+
+    private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
+        // TODO add your handling code here:
+        this.mostrarTela("telaVacinas");
+    }//GEN-LAST:event_jMenuItem19ActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

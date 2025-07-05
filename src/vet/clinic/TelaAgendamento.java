@@ -147,6 +147,11 @@ public class TelaAgendamento extends javax.swing.JPanel {
 
         ftfData.setColumns(10);
         ftfData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        ftfData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ftfDataActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Atualizar Horários");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -289,6 +294,10 @@ public class TelaAgendamento extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.preencherComboHorarios();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void ftfDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ftfDataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ftfDataActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
