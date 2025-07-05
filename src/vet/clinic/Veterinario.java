@@ -29,4 +29,9 @@ public class Veterinario extends Funcionario{
     public void excluirVet(Veterinario veterinario) {
         veterinario = null;
     }
+    
+    @Override
+    public String toString() {
+        return getNome() + " (Veterinário)";
+    }
 }

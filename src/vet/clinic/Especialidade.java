@@ -10,11 +10,11 @@ import java.util.List;
 
 public class Especialidade {
     private String tipo;
-    private float valorEspec;
+    private double valorEspec;
     private List<Veterinario> veterinarios;
 
     
-    public Especialidade(String tipo, float valorEspec) {
+    public Especialidade(String tipo, double valorEspec) {
         this.tipo = tipo;
         this.valorEspec = valorEspec;
         this.veterinarios = new ArrayList<>(); // Inicializa a lista de veterinários vazia
@@ -31,12 +31,12 @@ public class Especialidade {
     }
 
     
-    public float getValorEspec() {
+    public double getValorEspec() {
         return valorEspec;
     }
 
     
-    public void setValorEspec(float valorEspec) {
+    public void setValorEspec(double valorEspec) {
         this.valorEspec = valorEspec;
     }
 

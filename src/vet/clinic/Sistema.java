@@ -23,7 +23,10 @@ public class Sistema {
     public Sistema(){
         this.tutores = new ArrayList<>();
         this.animais = new ArrayList<>();
-        this.agendamentos = new ArrayList<>();
+        this.especialidades = new ArrayList<>();
+        this.vacinas = new ArrayList<>();
+        this.funcionarios = new ArrayList<>();
+        this.veterinarios = new ArrayList<>();
     }
     
     public ArrayList<Tutor> getTutores(){
@@ -34,9 +37,20 @@ public class Sistema {
         return animais;
     }
     
-    public ArrayList<Agendamento> getAgendamentos()
-    {
-        return agendamentos;
+    public ArrayList<Especialidade> getEspecialidades(){
+        return especialidades;
+    }
+    
+    public ArrayList<Vacina> getVacinas(){
+        return vacinas;
+    }
+    
+    public ArrayList<Funcionario> getFuncionarios(){
+        return funcionarios;
+    }
+    
+    public ArrayList<Veterinario> getVeterinarios(){
+        return veterinarios;
     }
     
 }

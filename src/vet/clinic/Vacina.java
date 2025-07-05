@@ -1,17 +1,11 @@
 package vet.clinic;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-
 public class Vacina {
     private String nome;
-    private LocalDate data, dataValidade;
-    private BigDecimal valor;
+    private double valor;
 
-    public Vacina(String nome, LocalDate data, LocalDate dataValidade, BigDecimal valor) {
+    public Vacina(String nome, double valor) {
         this.nome = nome;
-        this.data = data;
-        this.dataValidade = dataValidade;
         this.valor = valor;
     }
 
@@ -23,38 +17,16 @@ public class Vacina {
         this.nome = nome;
     }
 
-    public LocalDate getData() {
-        return data;
-    }
-
-    public void setData(LocalDate data) {
-        this.data = data;
-    }
-
-    public LocalDate getDataValidade() {
-        return dataValidade;
-    }
-
-    public void setDataValidade(LocalDate dataValidade) {
-        this.dataValidade = dataValidade;
-    }
-
-    public BigDecimal getValor() {
+    public double getValor() {
         return valor;
     }
 
-    public void setValor(BigDecimal valor) {
+    public void setValor(double valor) {
         this.valor = valor;
     }
 
     @Override
     public String toString() {
-        return "Vacina{" +
-                "nome='" + nome + '\'' +
-                ", data=" + data +
-                ", dataValidade=" + dataValidade +
-                ", valor=" + valor +
-                '}';
+        return this.nome;
     }
-
 }

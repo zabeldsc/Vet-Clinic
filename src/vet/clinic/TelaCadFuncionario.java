@@ -264,13 +264,7 @@ public class TelaCadFuncionario extends javax.swing.JPanel {
                 cxTelefone.getText().trim(),
                 cxTurnoTrab.getText().trim()
             );
-            telaPrincipal.getSistema().getFuncionarios().add(f); 
-            
-            JOptionPane.showMessageDialog(this,
-                "Cadastro realizado com sucesso!",
-                "Concluído",
-                JOptionPane.INFORMATION_MESSAGE);
-            telaPrincipal.mostrarTela("telaMenu");
+            telaPrincipal.getSistema().getFuncionarios().add(f);                         
         } else {
             if (cxCrmv.getText().trim().isEmpty()){
                 JOptionPane.showMessageDialog(this,
@@ -299,25 +293,25 @@ public class TelaCadFuncionario extends javax.swing.JPanel {
             }      
 
             Veterinario veterinario = new Veterinario(cxNome.getText().trim(), cxCpf.getText().trim(), cxEmail.getText().trim(), cxTelefone.getText().trim(), especialidadeSelecionada, cxCrmv.getText().trim(), cxTurnoTrab.getText().trim());
-            telaPrincipal.getSistema().getVeterinarios().add(veterinario);
-            
-            cxNome.setText("");
-            cxCpf.setText("");
-            cxEmail.setText("");
-            cxTelefone.setText("");
-            cxTurnoTrab.setText("");
-            cbTipoFuncionario.setSelectedIndex(0);
-            cxEspecialidade.setSelectedIndex(-1);  // sem seleção
-            
-            // garante que os extras fiquem invisíveis
-            cbTipoFuncionarioActionPerformed(null);
-
-            JOptionPane.showMessageDialog(this,
-                "Cadastro realizado com sucesso!",
-                "Concluído",
-                JOptionPane.INFORMATION_MESSAGE);
-            telaPrincipal.mostrarTela("telaMenu");
+            telaPrincipal.getSistema().getFuncionarios().add(veterinario);                    
         }
+        
+        cxNome.setText("");
+        cxCpf.setText("");
+        cxEmail.setText("");
+        cxTelefone.setText("");
+        cxTurnoTrab.setText("");
+        cbTipoFuncionario.setSelectedIndex(0);
+        cxEspecialidade.setSelectedIndex(-1);  // sem seleção
+
+        // garante que os extras fiquem invisíveis
+        cbTipoFuncionarioActionPerformed(null);
+
+        JOptionPane.showMessageDialog(this,
+            "Cadastro realizado com sucesso!",
+            "Concluído",
+            JOptionPane.INFORMATION_MESSAGE);
+        telaPrincipal.mostrarTela("telaMenu");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cxTurnoTrabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxTurnoTrabActionPerformed
