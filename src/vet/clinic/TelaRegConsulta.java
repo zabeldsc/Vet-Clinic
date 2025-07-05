@@ -101,6 +101,12 @@ public class TelaRegConsulta extends javax.swing.JPanel {
             }
         });
 
+        cxMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cxMesActionPerformed(evt);
+            }
+        });
+
         jLabel6.setText("Veterinário");
 
         cxVet.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -307,6 +313,10 @@ public class TelaRegConsulta extends javax.swing.JPanel {
 
         animal.adicionarConsulta(novaConsulta);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cxMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxMesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cxMesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

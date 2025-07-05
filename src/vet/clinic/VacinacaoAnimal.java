@@ -13,8 +13,8 @@ public class VacinacaoAnimal {
    
     public VacinacaoAnimal(LocalDate dataAplicacao, LocalDate dataValidade, Vacina vacina) {
         this.dataAplicacao = dataAplicacao;
-        this.dataValidade = dataValidade;
         this.vacina = vacina;
+        this.dataValidade = dataAplicacao.plusMonths(vacina.getMesesVencer());
     }
 
     public LocalDate getDataAplicacao() {
@@ -23,14 +23,6 @@ public class VacinacaoAnimal {
 
     public void setDataAplicacao(LocalDate dataAplicacao) {
         this.dataAplicacao = dataAplicacao;
-    }
-
-    public LocalDate getDataValidade() {
-        return dataValidade;
-    }
-
-    public void setDataValidade(LocalDate dataValidade) {
-        this.dataValidade = dataValidade;
     }
 
     public Vacina getVacina() {

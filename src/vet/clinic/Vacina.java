@@ -1,12 +1,16 @@
 package vet.clinic;
 
+import java.time.LocalDate;
+
 public class Vacina {
     private String nome;
     private double valor;
+    private int mesesVencer;
 
     public Vacina(String nome, double valor) {
         this.nome = nome;
         this.valor = valor;
+        this.mesesVencer = mesesVencer;
     }
 
     public String getNome() {
@@ -25,8 +29,17 @@ public class Vacina {
         this.valor = valor;
     }
 
+    public int getMesesVencer() {
+        return mesesVencer;
+    }
+
+    public void setMesesVencer(int mesesVencer) {
+        this.mesesVencer = mesesVencer;
+    }
+    
+    
     @Override
     public String toString() {
-        return this.nome;
+        return this.nome + " (R$ " + this.valor + ")";
     }
 }
