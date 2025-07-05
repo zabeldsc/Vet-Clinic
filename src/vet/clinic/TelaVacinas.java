@@ -14,12 +14,7 @@ import javax.swing.JOptionPane;
  *
  * @author zzsjzz
  */
-public class TelaVacinas extends javax.swing.JPanel {
-
-    /**
-     * Creates new form TelaVacinas
-     */
-    
+public class TelaVacinas extends javax.swing.JPanel {   
     private TelaPrincipal telaPrincipal;
     
     public TelaVacinas(TelaPrincipal telaPrincipal) {
@@ -29,12 +24,12 @@ public class TelaVacinas extends javax.swing.JPanel {
         this.addComponentListener(new java.awt.event.ComponentAdapter() {
             @Override
             public void componentShown(java.awt.event.ComponentEvent e) {
-                preencherComboVacinas();
+                preencherCombos();
             }
         });
     }
     
-    private void preencherComboVacinas(){
+    private void preencherCombos(){
         ArrayList<Vacina> lista = telaPrincipal.getSistema().getVacinas();
         ArrayList<Animal> animais = telaPrincipal.getSistema().getAnimais();
 
@@ -73,7 +68,6 @@ public class TelaVacinas extends javax.swing.JPanel {
         cxAno = new javax.swing.JTextField();
         cxAplicar = new javax.swing.JButton();
 
-        cxVacina.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cxVacina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cxVacinaActionPerformed(evt);
@@ -84,7 +78,6 @@ public class TelaVacinas extends javax.swing.JPanel {
 
         jLabel2.setText("Animal");
 
-        cxAnimal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cxAnimal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cxAnimalActionPerformed(evt);
@@ -224,9 +217,6 @@ public class TelaVacinas extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Data inválida: " + e.getMessage());
             return;
         }
-
-        // Se chegou aqui, todos os dados estão válidos
-        JOptionPane.showMessageDialog(this, "Dados válidos!");
         
          // Verifica se um animal foi selecionado
         if (cxAnimal.getSelectedItem() == null) {
@@ -239,6 +229,42 @@ public class TelaVacinas extends javax.swing.JPanel {
             return;
         }
         
+        String nomeSelecionado1 = (String) cxAnimal.getSelectedItem();
+
+        Animal animalSelecionado = null;
+        for (Animal a : telaPrincipal.getSistema().getAnimais()) {
+            if (a.getNome().equals(nomeSelecionado1)) {
+                animalSelecionado = a;
+                break;
+            }
+        }    
+        
+        String nomeSelecionado2 = (String) cxVacina.getSelectedItem();
+
+        Vacina vacSelecionada = null;
+        for (Vacina v : telaPrincipal.getSistema().getVacinas()) {
+            if (v.getNome().equals(nomeSelecionado2)) {
+                vacSelecionada = v;
+                break;
+            }
+        }        
+            
+        LocalDate diaAplicou = LocalDate.of(ano, mes, dia);
+        LocalDate diaVence = diaAplicou.plusMonths(vacSelecionada.getMesesVencer());       
+        
+        VacinacaoAnimal vacinacaoAnimal = new VacinacaoAnimal(diaAplicou, diaVence, vacSelecionada);
+        animalSelecionado.getCartaoVacina().add(vacinacaoAnimal);                        
+              
+        cxAnimal.setSelectedIndex(-1);  
+        cxVacina.setSelectedIndex(-1); 
+        cxDia.setText("");
+        cxMes.setText("");
+        cxAno.setText("");
+
+        JOptionPane.showMessageDialog(this,
+            "Vacina aplicada com sucesso!",
+            "Concluído",
+            JOptionPane.INFORMATION_MESSAGE);
         telaPrincipal.mostrarTela("telaMenu");
     }//GEN-LAST:event_cxAplicarActionPerformed
 

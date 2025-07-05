@@ -312,6 +312,16 @@ public class TelaRegConsulta extends javax.swing.JPanel {
         }
 
         animal.adicionarConsulta(novaConsulta);
+        
+        cxMedicamento.setText("");
+        cxDiagnostico.setText("");
+        cxProblema.setText("");
+        cxDia.setText("");
+        cxMes.setText("");
+        cxAno.setText("");
+        cxAnimal.setSelectedIndex(-1);
+        cxVet.setSelectedIndex(-1);
+        
         telaPrincipal.mostrarTela("telaMenu");
     }//GEN-LAST:event_jButton1ActionPerformed
 

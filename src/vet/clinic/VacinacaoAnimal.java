@@ -16,6 +16,10 @@ public class VacinacaoAnimal {
         this.vacina = vacina;
         this.dataValidade = dataAplicacao.plusMonths(vacina.getMesesVencer());
     }
+    
+    public LocalDate getDataVencimento() {
+        return dataValidade;
+    }
 
     public LocalDate getDataAplicacao() {
         return dataAplicacao;

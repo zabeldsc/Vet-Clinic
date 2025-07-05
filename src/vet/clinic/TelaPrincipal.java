@@ -5,8 +5,12 @@
 package vet.clinic;
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  *
@@ -39,9 +43,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().add(new TelaRegConsulta(this), "telaRegConsulta");
         getContentPane().add(new TelaProntuario(this), "telaProntuario");
         getContentPane().add(new TelaVacinas(this), "telaVacinas");
+        
+       
         // Exibe a primeira tela
-        mostrarTela("telaLogin");
-        setLocationRelativeTo(null); // centraliza na tela
+        mostrarTela("telaLogin");               
     }
     
     
@@ -320,9 +325,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu4.add(jMenuItem19);
 
         jMenuItem20.setText("Histórico");
+        jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem20ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem20);
 
         jMenuItem21.setText("Vencimento");
+        jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem21ActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuItem21);
 
         jMenuBar1.add(jMenu4);
@@ -1083,6 +1098,161 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.mostrarTela("telaVacinas");
     }//GEN-LAST:event_jMenuItem19ActionPerformed
+
+    private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
+         // Obtém a lista de animais
+        ArrayList<Animal> lista = sistema.getAnimais();
+        if (lista.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Não há animais cadastrados.",
+                "Histórico de Vacinas",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            return;
+        }
+
+        // Converte para array e exibe combo
+        Animal[] opcoes = lista.toArray(new Animal[0]);
+        Animal selecionado = (Animal) JOptionPane.showInputDialog(
+            this,
+            "Selecione o animal:",
+            "Histórico de Vacinas",
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            opcoes,
+            opcoes[0]
+        );
+
+        if (selecionado == null) {
+            return; // usuário cancelou
+        }
+
+        // Obtém o cartão de vacina
+        ArrayList<VacinacaoAnimal> cartao = selecionado.getCartaoVacina();
+        if (cartao.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "O animal \"" + selecionado.getNome() + "\" não possui vacinas registradas.",
+                "Histórico de Vacinas",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            return;
+        }
+
+        // Monta o histórico em texto
+        StringBuilder sb = new StringBuilder();
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        for (VacinacaoAnimal v : cartao) {
+            sb.append("Vacina: ").append(v.getVacina().getNome()).append("\n");
+            sb.append("Aplicação: ").append(v.getDataAplicacao().format(fmt)).append("\n");
+            sb.append("Vencimento: ").append(v.getDataVencimento().format(fmt)).append("\n");
+            sb.append("-----------------------------\n");
+        }
+
+        // Exibe o histórico
+        JTextArea area = new JTextArea(sb.toString());
+        area.setEditable(false);
+        area.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        JScrollPane scroll = new JScrollPane(area);
+        scroll.setPreferredSize(new Dimension(400, 300));
+
+        JOptionPane.showMessageDialog(
+            this,
+            scroll,
+            "Cartão de Vacinas – " + selecionado.getNome(),
+            JOptionPane.INFORMATION_MESSAGE
+        );
+    }//GEN-LAST:event_jMenuItem20ActionPerformed
+
+    private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
+        // Obtém a lista de animais
+        ArrayList<Animal> lista = sistema.getAnimais();
+        if (lista.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Não há animais cadastrados.",
+                "Vacinas Vencendo",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            return;
+        }
+
+        // Exibe combo para o usuário escolher o animal
+        Animal[] opcoes = lista.toArray(new Animal[0]);
+        Animal selecionado = (Animal) JOptionPane.showInputDialog(
+            this,
+            "Selecione o animal:",
+            "Vacinas que Vencem no Mês",
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            opcoes,
+            opcoes[0]
+        );
+
+        if (selecionado == null) {
+            return; // usuário cancelou
+        }
+
+        // Obtém o cartão de vacina
+        ArrayList<VacinacaoAnimal> cartao = selecionado.getCartaoVacina();
+        if (cartao.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "O animal \"" + selecionado.getNome() + "\" não possui vacinas registradas.",
+                "Vacinas Vencendo",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            return;
+        }
+
+        // Filtra vacinas que vencem no mês atual
+        LocalDate hoje = LocalDate.now();
+        Month mesAtual = hoje.getMonth();
+        int anoAtual = hoje.getYear();
+
+        ArrayList<VacinacaoAnimal> vencendo = new ArrayList<>();
+        for (VacinacaoAnimal v : cartao) {
+            LocalDate venc = v.getDataVencimento();
+            if (venc.getMonth() == mesAtual && venc.getYear() == anoAtual) {
+                vencendo.add(v);
+            }
+        }
+
+        // Exibe resultado
+        if (vencendo.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Nenhuma vacina de \"" + selecionado.getNome() + "\" vence neste mês.",
+                "Vacinas Vencendo",
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            return;
+        }
+
+        // Monta texto com vacinas que vencem
+        StringBuilder sb = new StringBuilder();
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        for (VacinacaoAnimal v : vencendo) {
+            sb.append("Vacina: ").append(v.getVacina().getNome()).append("\n");
+            sb.append("Aplicação: ").append(v.getDataAplicacao().format(fmt)).append("\n");
+            sb.append("Vencimento: ").append(v.getDataVencimento().format(fmt)).append("\n");
+            sb.append("-----------------------------\n");
+        }
+
+        JTextArea area = new JTextArea(sb.toString());
+        area.setEditable(false);
+        area.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        JScrollPane scroll = new JScrollPane(area);
+        scroll.setPreferredSize(new Dimension(400, 300));
+
+        JOptionPane.showMessageDialog(
+            this,
+            scroll,
+            "Vacinas que Vencem em " + mesAtual.getDisplayName(TextStyle.FULL, Locale.getDefault()),
+            JOptionPane.INFORMATION_MESSAGE
+        );
+    }//GEN-LAST:event_jMenuItem21ActionPerformed
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -285,6 +285,8 @@ public class TelaAgendamento extends javax.swing.JPanel {
         cbEspecialidade.setSelectedIndex(-1);
         ftfData.setValue(null);
         cbHora.setModel(new DefaultComboBoxModel<>());
+        
+        telaPrincipal.mostrarTela("telaMenu");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cbAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAnimalActionPerformed

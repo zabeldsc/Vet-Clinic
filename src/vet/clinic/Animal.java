@@ -2,17 +2,16 @@ package vet.clinic;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 class Animal {
     private String nome, raca;
     private String dataNasc;
     private Tutor tutor;
-    private List<VacinacaoAnimal> cartaoVacina;
-    private List<Consulta> consultas;
+    private ArrayList<VacinacaoAnimal> cartaoVacina;
+    private ArrayList<Consulta> consultas;
 
-    public Animal(String nome, String raca, String dataNasc, Tutor tutor, List<VacinacaoAnimal> cartaoVacina,
-            List<Consulta> consultas) {
+    public Animal(String nome, String raca, String dataNasc, Tutor tutor, ArrayList<VacinacaoAnimal> cartaoVacina,
+            ArrayList<Consulta> consultas) {
         this.nome = nome;
         this.raca = raca;
         this.dataNasc = dataNasc;
@@ -63,15 +62,15 @@ class Animal {
         this.tutor = tutor;
     }
 
-    public List<VacinacaoAnimal> getCartaoVacina() {
+    public ArrayList<VacinacaoAnimal> getCartaoVacina() {
         return cartaoVacina;
     }
 
-    public void setCartaoVacina(List<VacinacaoAnimal> cartaoVacina) {
+    public void setCartaoVacina(ArrayList<VacinacaoAnimal> cartaoVacina) {
         this.cartaoVacina = cartaoVacina;
     }
     
-    public List<Consulta> getConsultas()
+    public ArrayList<Consulta> getConsultas()
     {
         return consultas;
     }

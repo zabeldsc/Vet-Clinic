@@ -7,7 +7,7 @@ public class Vacina {
     private double valor;
     private int mesesVencer;
 
-    public Vacina(String nome, double valor) {
+    public Vacina(String nome, double valor, int mesesVencer) {
         this.nome = nome;
         this.valor = valor;
         this.mesesVencer = mesesVencer;

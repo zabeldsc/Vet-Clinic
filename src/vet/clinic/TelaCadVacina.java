@@ -34,6 +34,8 @@ public class TelaCadVacina extends javax.swing.JPanel {
         cxNome = new javax.swing.JTextField();
         cxValor = new javax.swing.JFormattedTextField();
         jLabel2 = new javax.swing.JLabel();
+        cxMeses = new javax.swing.JFormattedTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         jButton1.setText("Cadastrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -54,6 +56,10 @@ public class TelaCadVacina extends javax.swing.JPanel {
 
         jLabel2.setText("Valor:");
 
+        cxMeses.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+
+        jLabel3.setText("Meses de validade");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -61,11 +67,13 @@ public class TelaCadVacina extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3)
                     .addComponent(cxValor)
                     .addComponent(cxNome, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(cxMeses))
                 .addContainerGap(213, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -79,15 +87,20 @@ public class TelaCadVacina extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cxValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cxMeses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
                 .addComponent(jButton1)
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (cxNome.getText().trim().isEmpty() ||
-            cxValor.getText().trim().isEmpty()) {
+            cxValor.getText().trim().isEmpty() ||
+            cxMeses.getText().trim().isEmpty())  {
 
             JOptionPane.showMessageDialog(this,
                 "Por favor, preencha todos os campos!",
@@ -105,10 +118,20 @@ public class TelaCadVacina extends javax.swing.JPanel {
                 JOptionPane.ERROR_MESSAGE);
             return;
         }
+        
+        Number valorMeses = (Number) cxMeses.getValue();
+        if (valorMeses == null) {
+            JOptionPane.showMessageDialog(this,
+                "Valor inválido!",
+                "Erro de Formato",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
       
         Vacina vac = new Vacina(
             cxNome.getText().trim(),
-            valorNumero.doubleValue()
+            valorNumero.doubleValue(),
+            valorMeses.intValue()
         );
 
         
@@ -117,6 +140,7 @@ public class TelaCadVacina extends javax.swing.JPanel {
        
         cxNome.setText("");
         cxValor.setValue(null);
+        cxMeses.setValue(null);
 
         
         JOptionPane.showMessageDialog(this,
@@ -132,10 +156,12 @@ public class TelaCadVacina extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFormattedTextField cxMeses;
     private javax.swing.JTextField cxNome;
     private javax.swing.JFormattedTextField cxValor;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     // End of variables declaration//GEN-END:variables
 }
