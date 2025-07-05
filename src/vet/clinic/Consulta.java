@@ -5,22 +5,21 @@ import java.util.ArrayList;
 
 public class Consulta {
 
-    private String problema, diagnostico;
-    private ArrayList<String> medicamentos;
+    private String problema, diagnostico, medicamentos;
     private LocalDate data;
     private Veterinario vet;
 
-    public Consulta(String problema, String diagnostico, LocalDate data, Veterinario vet) {
+    public Consulta(String problema, String diagnostico, String medicamentos, LocalDate data, Veterinario vet) {
         this.problema = problema;
         this.diagnostico = diagnostico;
         this.data = data;
         this.vet = vet;
-        this.medicamentos = new ArrayList<>();
+        this.medicamentos = medicamentos;
     }
 
     public Consulta(LocalDate data, String descricao)
     {
-        this(descricao, " ", data, null);
+        this(descricao, "", "", data, null);
     }
 
     public String getProblema() {
@@ -39,11 +38,11 @@ public class Consulta {
         this.diagnostico = diagnostico;
     }
 
-    public ArrayList<String> getMedicamentos() {
+    public String getMedicamentos() {
         return medicamentos;
     }
 
-    public void setMedicamentos(ArrayList<String> medicamentos) {
+    public void setMedicamentos(String medicamentos) {
         this.medicamentos = medicamentos;
     }
 

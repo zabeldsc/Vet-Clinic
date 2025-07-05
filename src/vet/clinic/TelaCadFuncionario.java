@@ -293,7 +293,8 @@ public class TelaCadFuncionario extends javax.swing.JPanel {
             }      
 
             Veterinario veterinario = new Veterinario(cxNome.getText().trim(), cxCpf.getText().trim(), cxEmail.getText().trim(), cxTelefone.getText().trim(), especialidadeSelecionada, cxCrmv.getText().trim(), cxTurnoTrab.getText().trim());
-            telaPrincipal.getSistema().getFuncionarios().add(veterinario);                    
+            telaPrincipal.getSistema().getFuncionarios().add(veterinario);    
+            telaPrincipal.getSistema().getVeterinarios().add(veterinario);
         }
         
         cxNome.setText("");

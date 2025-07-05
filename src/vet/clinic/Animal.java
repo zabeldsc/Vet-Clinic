@@ -133,6 +133,11 @@ class Animal {
         }
         System.out.println("======================");
     }
+    
+    public void adicionarConsulta(Consulta consulta)
+    {
+        this.consultas.add(consulta);
+    }
 
     public static void main(String[] args) {
 

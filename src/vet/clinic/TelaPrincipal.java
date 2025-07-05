@@ -36,7 +36,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().add(new TelaAgendamento(this), "telaAgendamento");
         getContentPane().add(new TelaCadEspecialidade(this), "telaCadEspecialidade");
         getContentPane().add(new TelaCadVacina(this), "telaCadVacina");
-
+        getContentPane().add(new TelaRegConsulta(this), "telaRegConsulta");
         // Exibe a primeira tela
         mostrarTela("telaLogin");
         setLocationRelativeTo(null); // centraliza na tela
@@ -93,7 +93,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenuItem14 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem15 = new javax.swing.JMenuItem();
+        cxNovoAg = new javax.swing.JMenuItem();
         jMenuItem16 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem17 = new javax.swing.JMenuItem();
@@ -269,13 +269,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Agendamento");
 
-        jMenuItem15.setText("Novo");
-        jMenuItem15.addActionListener(new java.awt.event.ActionListener() {
+        cxNovoAg.setText("Novo");
+        cxNovoAg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cxNovoActionPerformed(evt);
+                cxNovoAgActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem15);
+        jMenu2.add(cxNovoAg);
 
         jMenuItem16.setText("Excluir");
         jMenuItem16.addActionListener(new java.awt.event.ActionListener() {
@@ -290,6 +290,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu3.setText("Consultas");
 
         jMenuItem17.setText("Registrar");
+        jMenuItem17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem17ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem17);
 
         jMenuItem18.setText("Prontuário");
@@ -574,7 +579,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void cxNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxNovoActionPerformed
         // TODO add your handling code here:
-        this.mostrarTela("telaAgendamento");
+        this.mostrarTela("telaCadFuncionario");
     }//GEN-LAST:event_cxNovoActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -1035,9 +1040,20 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
     }//GEN-LAST:event_jMenuItem16ActionPerformed
 
+    private void jMenuItem17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem17ActionPerformed
+        // TODO add your handling code here:
+        this.mostrarTela("telaRegConsulta");
+    }//GEN-LAST:event_jMenuItem17ActionPerformed
+
+    private void cxNovoAgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cxNovoAgActionPerformed
+        // TODO add your handling code here:
+        this.mostrarTela("telaAgendamento");
+    }//GEN-LAST:event_cxNovoAgActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem cxNovo;
+    private javax.swing.JMenuItem cxNovoAg;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
@@ -1055,7 +1071,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem12;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
