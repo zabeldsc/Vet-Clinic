@@ -18,7 +18,6 @@ import java.util.Locale;
  */
 public class TelaPrincipal extends javax.swing.JFrame {
     CardLayout cardLayout;
-    JPanel container;
     private Sistema sistema = new Sistema();
 
     public TelaPrincipal() {
@@ -30,7 +29,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(new CardLayout());
 
         // Adiciona as telas ao CardLayout
-        getContentPane().add(new TelaLogin(this), "telaLogin");
         getContentPane().add(new TelaMenu(this), "telaMenu");
         getContentPane().add(new TelaCadTutor(this), "telaCadTutor");
         getContentPane().add(new TelaCadAnimal(this), "telaCadAnimal");
@@ -45,8 +43,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         getContentPane().add(new TelaVacinas(this), "telaVacinas");
         
        
-        // Exibe a primeira tela
-        mostrarTela("telaLogin");               
+        mostrarTela("telaMenu");               
     }
     
     
