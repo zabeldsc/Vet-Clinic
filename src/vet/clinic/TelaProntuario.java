@@ -146,6 +146,15 @@ public class TelaProntuario extends javax.swing.JPanel {
         }
 
         if (animalSelecionado != null) {
+            
+            if (animalSelecionado.getConsultas().isEmpty()) {
+                JOptionPane.showMessageDialog(this, 
+                    "Não há consultas cadastradas para esse animal.", 
+                    "Prontuario",
+                    JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            
             List<Consulta> consultas = animalSelecionado.getConsultas();
 
             DefaultTableModel model = (DefaultTableModel) tabelaInfo.getModel();
