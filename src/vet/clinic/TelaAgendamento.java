@@ -11,6 +11,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -62,6 +63,7 @@ public class TelaAgendamento extends javax.swing.JPanel {
             cbHora.setModel(new DefaultComboBoxModel<>());
             return;
         }
+        
         LocalDate data = d.toInstant()
                           .atZone(ZoneId.systemDefault())
                           .toLocalDate();
@@ -234,6 +236,7 @@ public class TelaAgendamento extends javax.swing.JPanel {
         LocalDate data = d.toInstant()
                           .atZone(ZoneId.systemDefault())
                           .toLocalDate();
+        
         LocalTime hora = LocalTime.parse(
             txtHora,
             DateTimeFormatter.ofPattern("HH:mm")
@@ -267,16 +270,32 @@ public class TelaAgendamento extends javax.swing.JPanel {
             );
             return;
         }
+        
+        // Verifica se já existe agendamento no mesmo dia e hora
+        for (Agendamento a : telaPrincipal.getSistema().getAgendamentos()) {
+            if (a.getDataHora().equals(dataHora)
+             && a.getStatus() == Agendamento.Status.AGENDADO) {
+                JOptionPane.showMessageDialog(
+                    this,
+                    "Já existe um agendamento para esse horário.",
+                    "Horário Ocupado",
+                    JOptionPane.WARNING_MESSAGE
+                );
+                return;
+            }
+        }
 
         // Cria e salva o agendamento
         Agendamento ag = new Agendamento(animal, dataHora, esp);
         telaPrincipal.getSistema().getAgendamentos().add(ag);
 
+        
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm", new Locale("pt", "BR"));
+        
         // Feedback e limpeza
         JOptionPane.showMessageDialog(
             this,
-            "Consulta agendada:\n" +
-            dataHora.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")),
+            "Consulta agendada:\n" + dataHora.format(fmt),
             "Sucesso",
             JOptionPane.INFORMATION_MESSAGE
         );
