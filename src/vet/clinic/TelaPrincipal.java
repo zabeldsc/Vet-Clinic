@@ -899,6 +899,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
         cxValor.setColumns(10);
         cxValor.setValue(sel.getValor());
+        
+        JFormattedTextField cxMeses = new JFormattedTextField(
+            new javax.swing.text.DefaultFormatterFactory(
+                    new javax.swing.text.NumberFormatter()
+            )
+        );
+        cxMeses.setColumns(10);
+        cxMeses.setValue(sel.getMesesVencer());
 
         // monta o painel de edição
         JPanel panel = new JPanel(new GridLayout(0, 1));
@@ -906,6 +914,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         panel.add(cxNome);
         panel.add(new JLabel("Valor:")); 
         panel.add(cxValor);
+        panel.add(new JLabel("Meses para vencer:")); 
+        panel.add(cxMeses);
 
         // exibe diálogo de confirmação
         int resp = JOptionPane.showConfirmDialog(
@@ -921,9 +931,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         // aplica as alterações no objeto
         sel.setNome(cxNome.getText().trim());
+        
         Object val = cxValor.getValue();
         if (val instanceof Number) {
             sel.setValor(((Number) val).doubleValue());
+        }
+        
+        Object meses = cxMeses.getValue();
+        if (meses instanceof Number) {
+            sel.setMesesVencer(((Number) meses).intValue());
         }
 
         // feedback
