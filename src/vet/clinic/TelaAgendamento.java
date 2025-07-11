@@ -290,7 +290,7 @@ public class TelaAgendamento extends javax.swing.JPanel {
         telaPrincipal.getSistema().getAgendamentos().add(ag);
 
         
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm", new Locale("pt", "BR"));
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm", Locale.of("pt", "BR"));
         
         // Feedback e limpeza
         JOptionPane.showMessageDialog(
